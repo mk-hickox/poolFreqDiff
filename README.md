@@ -11,4 +11,5 @@ The directory includes the following scripts:
 This script takes a PoPoolation/PoPoolation2-style ".sync" file and outputs an R script that can be run as a batch job.
 
 For a help message and some details type
+
 $ poolFreqDiffTest_QBGLM.py -h
