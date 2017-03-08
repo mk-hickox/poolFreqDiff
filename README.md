@@ -19,6 +19,10 @@ For a help message and some details type
 	poolFreqDiffTest_QBGLM.py -h
 
 
+## 2) poolFreqDiffTest.R
+
+This is a collection of R functions that are needed to run the R script (see below).
+
 The directory also includes a short test file which is a standard .sync file as implemented in: 
 
 PoPoolation (Kofler et al., 2011 PLoS ONE 6:e15925)
