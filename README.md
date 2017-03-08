@@ -40,9 +40,9 @@ PoPoolation (Kofler et al., 2011 PLoS ONE 6:e15925) and PoPoolation2 (Kofler et 
 
 There are two SNPs in this file (line 2 [2:92271] and line 7 [2:92276]), one of which (line 7 [2:92276]) has a highly significant allele frequency difference between two treatments
 
-To run the analysis simply type:
+To run the analysis, within the directory of scripts simply type:
 
-	poolFreqDiffTest_QBGLM.py -filename test.sync -npops 4 -nlevels 2 -n 40 -mincnt 2 -minc 10 -maxc 100 -rescale nr -zeroes 1 > test.rin
+	python ./poolFreqDiffTest_QBGLM.py -filename test.sync -npops 4 -nlevels 2 -n 40 -mincnt 2 -minc 10 -maxc 100 -rescale nr -zeroes 1 > test.rin
 
 This will create an Rscript "test.rin" which can then be run:
 
