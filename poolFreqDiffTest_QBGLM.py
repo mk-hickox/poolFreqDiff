@@ -265,8 +265,9 @@ if __name__ == "__main__":
         scale = args['scale']
         zeroes=str(args['zeroes'])
         lines = open(filnam, 'rb')
+        scriptsdir=os.path.dirname(os.path.realpath(__file__))
         print 'suppressWarnings(library(methods))'
-        print 'source("~/bin/poolFreqDiffTest.R")'
+        print 'source('+scriptsdir+'/poolFreqDiffTest.R")'
         print '#Parameters: ',"npops =",npops,"nlevels =",nlevels,"mincnt =",mincnt,"min coverege =",minc,\
               "max coverage =",maxc,"rescale =",rescale,"scale =",scale,"zeroes =",zeroes
         for line in lines:
