@@ -267,8 +267,8 @@ if __name__ == "__main__":
         lines = open(filnam, 'rb')
         scriptsdir=os.path.dirname(os.path.realpath(__file__))
         print 'suppressWarnings(library(methods))'
-        print 'currdir<-"'+scriptsdir+'"'
-        print 'source("'+scriptsdir+'/poolFreqDiffTest.R")'
+        print 'currdir<-'scriptsdir
+        print 'system(paste(Rscript "'+scriptsdir+'/poolFreqDiffTest.R",currdir))'
         print '#Parameters: ',"npops =",npops,"nlevels =",nlevels,"mincnt =",mincnt,"min coverege =",minc,\
               "max coverage =",maxc,"rescale =",rescale,"scale =",scale,"zeroes =",zeroes
         for line in lines:

@@ -1,6 +1,9 @@
 #
 # Source the G-test
-source("~/Desktop/Data/RData/RScripts/G_test.R")
+args <- commandArgs(trailingOnly = TRUE)
+currdir<-args[1]
+#print(currdir)
+system(paste("Rscript G_test.R",currdir))
 #
 #
 # FUNCTION: Woolf-test
