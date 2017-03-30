@@ -1,7 +1,6 @@
 #
 # Source the G-test
-currdir<-getwd()
-source(paste(currdir,"/G_test.R",sep=""))
+source("~/Desktop/Data/RData/RScripts/G_test.R")
 #
 #
 # FUNCTION: Woolf-test
