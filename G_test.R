@@ -302,59 +302,6 @@ G_test_fhat<-function(array,add=FALSE){
 }
 #####
 #
-# Function: Get GLM results from array
-#####
-#get GLM data-set from k-way table
-get_glm_dat<-function(array,add=FALSE){
-  if(add == TRUE & any(array == 0)){
-    array<-array+1
-  }
-  acnt <- vector(length = dim(array)[3]*dim(array)[2])
-  Tcnt <- vector(length = dim(array)[3]*dim(array)[2])
-  line <- vector(length = dim(array)[3]*dim(array)[2])
-  pop <- vector(length = dim(array)[3]*dim(array)[2])
-  j <-1
-  for(k in seq(1,dim(array)[3],1)){
-    for(i in seq(1,dim(array)[2],1)){
-      #      print(c(i,j,k))
-      acnt[j]<-array[i,1,k]
-      Tcnt[j]<-sum(array[i,,k])
-      line[j]<-as.character(i)
-      pop[j]<-as.character(k)
-      j <- j + 1
-    }
-  }
-  d<-data.frame("acnt"=acnt,"Tcnt"=Tcnt,"line"=line,"pop"=pop)
-  mod<-anova(glm(cbind(d$acnt,d$Tcnt-d$acnt)~d$line*d$pop,
-                   family = "binomial"),test="Chisq")
-  return(mod)
-}
-#####
-# Function: Get GLM dataframe from array
-#####
-#get GLM data-set from k-way table
-get_glm_df<-function(array,add=FALSE){
-  if(add == TRUE & any(array == 0)){
-    array<-array+1
-  }
-  acnt <- vector(length = dim(array)[3]*dim(array)[2])
-  Tcnt <- vector(length = dim(array)[3]*dim(array)[2])
-  line <- vector(length = dim(array)[3]*dim(array)[2])
-  pop <- vector(length = dim(array)[3]*dim(array)[2])
-  j <-1
-  for(k in seq(1,dim(array)[3],1)){
-    for(i in seq(1,dim(array)[2],1)){
-      #      print(c(i,j,k))
-      acnt[j]<-array[i,1,k]
-      Tcnt[j]<-sum(array[i,,k])
-      line[j]<-as.character(i)
-      pop[j]<-as.character(k)
-      j <- j + 1
-    }
-  }
-  d<-data.frame("acnt"=acnt,"Tcnt"=Tcnt,"line"=line,"pop"=pop)
-  return(d)
-}
 
 ## Example data from Sokal and Rohlf (1969) multiway independence test.
 #####
@@ -365,7 +312,6 @@ sr_matrix <- array(c(55,34,6,17,23,15,1,5,7,3,4,5,8,5,3,3),dim=c(2,2,4),
 sr_res<-G_test(sr_matrix,correction="cont")
 sr_fhat<-G_test_fhat(sr_matrix)$f_hat
 get_glm_dat(sr_matrix)
-sr_res
 #####
 
 ## Testing the functions
