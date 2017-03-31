@@ -1,9 +1,8 @@
 #
+cat("# Loaded: poolFreqDiffTest.R\n")
 # Source the G-test
-args <- commandArgs(trailingOnly = TRUE)
-currdir<-args[1]
-#print(currdir)
-system(paste("Rscript G_test.R",currdir))
+cat("# Looking in: ",currdir," for G_test.R")
+source(paste(currdir,"G_test.R",sep=""))
 #
 #
 # FUNCTION: Woolf-test

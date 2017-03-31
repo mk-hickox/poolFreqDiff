@@ -18,7 +18,7 @@
 
 ## Testing: G-test direct G computation
 #####
-
+cat("# Loaded: G_test.R\n")
 #test data
 ###
 #matrix <-array(c(1,1,40,42,1,1,35,41,111,1,1,87),dim = c(2,2,3),
@@ -311,7 +311,6 @@ sr_matrix <- array(c(55,34,6,17,23,15,1,5,7,3,4,5,8,5,3,3),dim=c(2,2,4),
 
 sr_res<-G_test(sr_matrix,correction="cont")
 sr_fhat<-G_test_fhat(sr_matrix)$f_hat
-get_glm_dat(sr_matrix)
 #####
 
 ## Testing the functions
