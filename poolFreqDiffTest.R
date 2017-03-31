@@ -1,8 +1,8 @@
 #
 cat("# Loaded: poolFreqDiffTest.R\n")
 # Source the G-test
-cat("# Looking in: ",currdir," for G_test.R")
-source(paste(currdir,"G_test.R",sep=""))
+cat("# Looking in: ",currdir," for G_test.R\n")
+source(paste(currdir,"/G_test.R",sep=""))
 #
 #
 # FUNCTION: Woolf-test

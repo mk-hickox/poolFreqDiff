@@ -268,7 +268,7 @@ if __name__ == "__main__":
         scriptsdir=os.path.dirname(os.path.realpath(__file__))
         print 'suppressWarnings(library(methods))'
         print 'currdir<<-"'+scriptsdir+'"'
-        print 'source(paste(currdir,"poolFreqDiffTest.R",sep=""))'
+        print 'source(paste(currdir,"/poolFreqDiffTest.R",sep=""))'
         print '#Parameters: ',"npops =",npops,"nlevels =",nlevels,"mincnt =",mincnt,"min coverege =",minc,\
               "max coverage =",maxc,"rescale =",rescale,"scale =",scale,"zeroes =",zeroes
         for line in lines:
