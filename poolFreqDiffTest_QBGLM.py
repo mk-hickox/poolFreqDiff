@@ -103,9 +103,6 @@ def checkSNP(line,maxc,minc,mincnt):
 
 def printRlines(cnts, major_alleles, npops, nlevels, n_list,
                 mincnt, line, rescale, scale, zeroes):
-    # Ensure n_list is a list of integers, one per population
-    if not isinstance(n_list, list) or not all(isinstance(n, int) for n in n_list):
-        raise ValueError("n_list must be a list of integers, one per population.")
     # prints a line that will run a glm in R and a line that will
     # print the results of that glm
     counts = []
@@ -263,7 +260,7 @@ if __name__ == "__main__":
         filnam = args['filename']
         npops = int(args['npops'])
         nlevels = int(args['nlevels'])
-        n = int(args['n'])
+        n_list = (args['n'])
         mincnt = int(args['mincnt'])
         minc = int(args['minc'])
         maxc = int(args['maxc'])
@@ -286,7 +283,7 @@ if __name__ == "__main__":
                 if major_alleles != "not SNP":
                     #print major_alleles #script tester line
                     #print SNP #script tester line
-                    printRlines(SNP,major_alleles,npops,nlevels,n,mincnt,\
+                    printRlines(SNP,major_alleles,npops,nlevels,n_list,mincnt,\
                                 line,rescale,scale,zeroes)
     except IOError:
         sys.stderr.write("stdout is closed")
