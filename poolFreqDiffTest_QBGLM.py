@@ -96,13 +96,16 @@ def checkSNP(line,maxc,minc,mincnt):
         # then the SNP is considered invalid
         # coverage is counted across As,Ts,Cs and Gs,
         # Ns and INDELs *not* counted
- 	if sum(pop[:-2]) > maxc or sum(pop[:-2]) < minc:
+    if sum(pop[:-2]) > maxc or sum(pop[:-2]) < minc:
             return "not SNP"#: coverage too high or too low
         
     return cnts
 
-def printRlines(cnts,major_alleles,npops,nlevels,n,\
-                mincnt,line,rescale,scale,zeroes):
+def printRlines(cnts, major_alleles, npops, nlevels, n_list,
+                mincnt, line, rescale, scale, zeroes):
+    # Ensure n_list is a list of integers, one per population
+    if not isinstance(n_list, list) or not all(isinstance(n, int) for n in n_list):
+        raise ValueError("n_list must be a list of integers, one per population.")
     # prints a line that will run a glm in R and a line that will
     # print the results of that glm
     counts = []
@@ -162,7 +165,8 @@ def printRlines(cnts,major_alleles,npops,nlevels,n,\
     if rescale == 'neff':
     # rescale the data
         #print scale
-        for p in range(0,len(cnts),nlevels):
+        # Original logic, now iterate over n_list to handle different n values
+        for p, n in zip(range(0, len(cnts), nlevels), n_list):
             pop=cnts[p:p+nlevels]
             #print pop #script tester line
             samples = []
@@ -225,8 +229,10 @@ if __name__ == "__main__":
     parser.add_argument('-nlevels',
                         help = 'Number of levels in the population.')
 
-    parser.add_argument('-n',
-                        help = 'Number of individuals in the pool.')
+# Modify the argument parsing for -n to accept multiple values
+    parser.add_argument('-n', nargs='+', type=int,
+                        help='Number of individuals in each pool. Can specify multiple numbers for different pools.')
+
 
     parser.add_argument('-mincnt', default = 16,
                         help = 'Minimum count needed to consider a SNP.'+\
