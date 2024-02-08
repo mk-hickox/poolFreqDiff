@@ -261,6 +261,10 @@ if __name__ == "__main__":
         npops = int(args['npops'])
         nlevels = int(args['nlevels'])
         n_list = (args['n'])
+        # Check if the length of n_list matches npops
+        if len(n_list) != npops:
+            sys.stderr.write("Error: The length of -n list (%d) does not match the number of populations (-npops %d).\n" % (len(n_list), npops))
+            sys.exit(1)
         mincnt = int(args['mincnt'])
         minc = int(args['minc'])
         maxc = int(args['maxc'])
