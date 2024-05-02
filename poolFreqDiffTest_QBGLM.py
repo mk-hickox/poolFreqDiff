@@ -96,7 +96,7 @@ def checkSNP(line,maxc,minc,mincnt):
         # then the SNP is considered invalid
         # coverage is counted across As,Ts,Cs and Gs,
         # Ns and INDELs *not* counted
-    if sum(pop[:-2]) > maxc or sum(pop[:-2]) < minc:
+    	if sum(pop[:-2]) > maxc or sum(pop[:-2]) < minc:
             return "not SNP"#: coverage too high or too low
         
     return cnts
