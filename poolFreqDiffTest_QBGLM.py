@@ -80,26 +80,27 @@ def GetMajorAlleles(cnts,mincnt,minc):
     return major_alleles
 
 
-def checkSNP(line,maxc,minc,mincnt):
+def checkSNP(line, maxc, minc, mincnt):
     # checks the SNP line for coverage
     # 1) each population has at least minc
     # 2) no population has > maxc
     # 3) no indels
-    line = [i.replace("\n","") for i in line.split("\t")]
+    line = [i.replace("\n", "") for i in line.split("\t")]
     cnts = line[3:]
-    #print cnts #script tester line
-    #print maxc, minc #script tester line
-    for i in range(0,len(cnts)):
+    # print cnts #script tester line
+    # print maxc, minc #script tester line
+    for i in range(0, len(cnts)):
         pop = [int(j) for j in cnts[i].split(":")]
-        #print pop, sum(pop), sum(pop) > maxc, sum(pop) < minc #script tester line
+        # print pop, sum(pop), sum(pop) > maxc, sum(pop) < minc #script tester line
         # If the coverage within a population is > maxc or < minc
         # then the SNP is considered invalid
-        # coverage is counted across As,Ts,Cs and Gs,
+        # coverage is counted across As, Ts, Cs and Gs,
         # Ns and INDELs *not* counted
-    	if sum(pop[:-2]) > maxc or sum(pop[:-2]) < minc:
-            return "not SNP"#: coverage too high or too low
+        if sum(pop[:-2]) > maxc or sum(pop[:-2]) < minc:
+            return "not SNP"  # coverage too high or too low
         
     return cnts
+
 
 def printRlines(cnts, major_alleles, npops, nlevels, n_list,
                 mincnt, line, rescale, scale, zeroes):
