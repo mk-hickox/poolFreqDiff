@@ -80,26 +80,27 @@ def GetMajorAlleles(cnts,mincnt,minc):
     return major_alleles
 
 
-def checkSNP(line,maxc,minc,mincnt):
+def checkSNP(line, maxc, minc, mincnt):
     # checks the SNP line for coverage
     # 1) each population has at least minc
     # 2) no population has > maxc
     # 3) no indels
-    line = [i.replace("\n","") for i in line.split("\t")]
+    line = [i.replace("\n", "") for i in line.split("\t")]
     cnts = line[3:]
-    #print cnts #script tester line
-    #print maxc, minc #script tester line
-    for i in range(0,len(cnts)):
+    # print cnts #script tester line
+    # print maxc, minc #script tester line
+    for i in range(0, len(cnts)):
         pop = [int(j) for j in cnts[i].split(":")]
-        #print pop, sum(pop), sum(pop) > maxc, sum(pop) < minc #script tester line
+        # print pop, sum(pop), sum(pop) > maxc, sum(pop) < minc #script tester line
         # If the coverage within a population is > maxc or < minc
         # then the SNP is considered invalid
-        # coverage is counted across As,Ts,Cs and Gs,
+        # coverage is counted across As, Ts, Cs and Gs,
         # Ns and INDELs *not* counted
-    	if sum(pop[:-2]) > maxc or sum(pop[:-2]) < minc:
-            return "not SNP"#: coverage too high or too low
+        if sum(pop[:-2]) > maxc or sum(pop[:-2]) < minc:
+            return "not SNP"  # coverage too high or too low
         
     return cnts
+
 
 def printRlines(cnts, major_alleles, npops, nlevels, n_list,
                 mincnt, line, rescale, scale, zeroes):
@@ -162,9 +163,8 @@ def printRlines(cnts, major_alleles, npops, nlevels, n_list,
     if rescale == 'neff':
     # rescale the data
         #print scale
-        # Original logic, now iterate over n_list to handle different n values
-        for p, n in zip(range(0, len(cnts), nlevels), n_list):
-            pop=cnts[p:p+nlevels]
+	for p in range(0,len(cnts),nlevels):
+	    pop=cnts[p:p+nlevels]
             #print pop #script tester line
             samples = []
             for sam in range(0,nlevels):
@@ -174,7 +174,9 @@ def printRlines(cnts, major_alleles, npops, nlevels, n_list,
                 allele_i = {"A":0, "T":1, "C":2, "G":3}
                 #print samples #script tester line
                 # Get alleles counts from each sample
-            for sam in samples:
+            for s in range(0,nlevels):
+		sam=samples[s]
+		n = n_list[p+s]
                 # Deal with Major Allele
                 #print sam #script tester line
                 alleles = sam.split(":")
@@ -262,8 +264,8 @@ if __name__ == "__main__":
         nlevels = int(args['nlevels'])
         n_list = (args['n'])
         # Check if the length of n_list matches npops
-        if len(n_list) != npops:
-            sys.stderr.write("Error: The length of -n list (%d) does not match the number of populations (-npops %d).\n" % (len(n_list), npops))
+        if len(n_list) != npops*nlevels:
+            sys.stderr.write("Error: The length of -n list (%d) does not match the number of pools(-npops %d).\n" % (len(n_list), npops))
             sys.exit(1)
         mincnt = int(args['mincnt'])
         minc = int(args['minc'])
