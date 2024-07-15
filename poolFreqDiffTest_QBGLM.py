@@ -117,7 +117,7 @@ def printRlines(cnts, major_alleles, npops, nlevels, n_list,
             samples = []
             for sam in range(0,nlevels):
                 exec "sample_%s=pop[sam]" %(sam)
-            	exec "samples.append(sample_%s)" %(sam)
+                exec "samples.append(sample_%s)" %(sam)
 		#exec "print sample_%s" %(i)
                 allele_i = {"A":0, "T":1, "C":2, "G":3}
                 #print samples #script tester line
@@ -175,8 +175,8 @@ def printRlines(cnts, major_alleles, npops, nlevels, n_list,
                 #print samples #script tester line
                 # Get alleles counts from each sample
             for s in range(0,nlevels):
-		sam=samples[s]
-		n = n_list[p+s]
+                sam=samples[s]
+                n = n_list[p+s]
                 # Deal with Major Allele
                 #print sam #script tester line
                 alleles = sam.split(":")
@@ -188,8 +188,9 @@ def printRlines(cnts, major_alleles, npops, nlevels, n_list,
                 neff=(asum*(n*2)-1)/((n*2)+asum)
                 ac=afreq*neff
                 counts.append(str(int(round(ac))))        
-            for sam in samples:
-                # Deal with Minor Allele
+            for s in range(0,nlevels):
+                sam=samples[s]
+                n = n_list[p+s]
                 alleles=sam.split(":")
                 asum=int(alleles[allele_i[major_alleles[1][0]]])+int(alleles[allele_i[major_alleles[0][0]]])
                 afreq=float(alleles[allele_i[major_alleles[0][0]]])/float(asum)
@@ -202,7 +203,7 @@ def printRlines(cnts, major_alleles, npops, nlevels, n_list,
     #print counts #script tester line
     counts=','.join(counts)
     print 'matrix<-array(c('+counts+'),'+\
-          'dim=c('+str(nlevels)+',2,'+str(npops)+'))'
+            'dim=c('+str(nlevels)+',2,'+str(npops)+'))'
     #print line #script tester line
     print 'dat<-get_dat(matrix,zeroes='+zeroes+')'
     #print 'print(dat)'#Script tester line
@@ -279,7 +280,7 @@ if __name__ == "__main__":
         print 'currdir<<-"'+scriptsdir+'"'
         print 'source(paste(currdir,"/poolFreqDiffTest.R",sep=""))'
         print '#Parameters: ',"npops =",npops,"nlevels =",nlevels,"mincnt =",mincnt,"min coverege =",minc,\
-              "max coverage =",maxc,"rescale =",rescale,"scale =",scale,"zeroes =",zeroes
+                "max coverage =",maxc,"rescale =",rescale,"scale =",scale,"zeroes =",zeroes
         for line in lines:
             SNP = checkSNP(line,maxc,minc,mincnt)
             #print SNP #script tester line
